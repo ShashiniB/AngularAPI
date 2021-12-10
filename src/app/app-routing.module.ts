@@ -1,20 +1,20 @@
-import { Component, NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+import { CreateuserComponent } from './components/createuser/createuser.component';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddUserComponent } from './users/add-user/add-user.component';
-import { DeleteUserComponent } from './users/delete-user/delete-user.component';
-import { UpdateUserComponent } from './users/update-user/update-user.component';
-import { UserListComponent } from './users/user-list/user-list.component';
-
+import { UserlistComponent } from './components/userlist/userlist.component';
+import { UpdateuserComponent } from './components/updateuser/updateuser.component';
 
 const routes: Routes = [
-{path: 'create', component:AddUserComponent},
-{path: 'list', component:UserListComponent},
-{path: 'delete/:id', component:DeleteUserComponent},
-{path: 'update/:id', component:UpdateUserComponent}
+  { path: '', redirectTo: '/register', pathMatch: 'full' },
+  { path: 'register', component: CreateuserComponent },
+  { path: 'userlist', component: UserlistComponent },
+  { path: 'updateuser/:id', component: UpdateuserComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
+

@@ -1,17 +1,41 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  private _url: string = 'https://reqres.in/api/users';
 
-  baseUrl: string = 'https://reqres.in/api/users?page=';
-  constructor(private http:HttpClient) { }
-  data:any;
+  constructor(private http: HttpClient) {}
 
-  listUsers(){
-    const pageNumber =2; //pagination eke click wena number eka methanta assign karanna. pageNumbe kyna variable eka ain karala kelinma 15 line eke pageNumber kyala thyena ekata e variable eka assign karanna.
-   return this.http.get(this.baseUrl+pageNumber  + 'users');
+  getUsers(pageNumber: number) {
+    return this.http.get(`${this._url}?page=${pageNumber}`);
+  }
+
+  getUser(id:number){
+    return this.http.get(`${this._url}/${id}`);
+  }
+
+  addUser(email: any, firstname: any, lastname: any) {
+    const user = {
+      email: email,
+      firstname: firstname,
+      lastname: lastname,
+    };
+    console.log(user);
+    return this.http.post(this._url, user);
+  }
+
+  updateUser(id: any, name: any, job: any) {
+    const user = {
+      name: name,
+      job: job,
+    };
+    return this.http.put(`${this._url}/${id}`, user);
+  }
+
+  deleteUser(id: any) {
+    return this.http.delete(`${this._url}/${id}`);
   }
 }

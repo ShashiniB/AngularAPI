@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <table mat-table class="mat-elevation-z8">
+    <thead>
+      <tr>
+        <th scope="col" class="text-center">ID</th>
+        <th scope="col" class="text-center">Email</th>
+        <th scope="col" class="text-center">First Name</th>
+        <th scope="col" class="text-center">Last Name</th>
+        <th scope="col" class="text-center">Avatar</th>
+        <th scope="col" class="text-center">Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let coldata of usersObject.data">
+        <td class="text-center">{{ coldata.id }}</td>
+        <td class="text-center">{{ coldata.email }}</td>
+        <td class="text-center">{{ coldata.first_name }}</td>
+        <td class="text-center">{{ coldata.last_name }}</td>
+  
+        <td class="text-center">
+          <img src="{{ coldata.avatar }}" />
+        </td>
+        <td class="text-center">
+          <button mat-raised-button color="warn" (click)="deleteUser(coldata.id)">Delete</button> &nbsp;
+          <button mat-raised-button color="primary" [routerLink]="['/updateuser', coldata.id]">Update
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <mat-paginator
+    [length]="usersObject.total"
+    [pageSize]="usersObject.per_page"
+    [pageIndex]="pageNumber"
+    aria-label="Select page"
+    (page)="handlePage($event)"
+    >
+  </mat-paginator>
+</div>
